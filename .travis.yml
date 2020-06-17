@@ -9,7 +9,7 @@ os:
 # so it is acceptable. If we remove the branch restriction, remove this too.
 # If Windows builds on Travis are fixed, and work when secrets are in use,
 # remove this too.
-filter_secrets: false
+#filter_secrets: false
 matrix:
   allow_failures:
     - os: windows
