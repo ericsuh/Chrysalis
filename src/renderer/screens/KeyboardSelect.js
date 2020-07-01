@@ -142,13 +142,16 @@ class KeyboardSelect extends React.Component {
   };
 
   findKeyboards = async () => {
+    console.log("KeyboardSelect.findKeyboards() called; usb attach or detach");
     this.setState({ loading: true });
     let focus = new Focus();
 
     return new Promise(resolve => {
+      console.log("findKeyboards(): running focus.find()");
       focus
         .find(...Hardware.serial)
         .then(async devices => {
+          console.log("findKeyboards(), found:", devices);
           let supported_devices = [];
           for (const device of devices) {
             device.accessible = await focus.isDeviceAccessible(device);
@@ -166,6 +169,7 @@ class KeyboardSelect extends React.Component {
           resolve(list.length > 0);
         })
         .catch(() => {
+          console.log("findKeyboards(): exception handler");
           const list = this.findNonSerialKeyboards([]);
           this.setState({
             loading: false,

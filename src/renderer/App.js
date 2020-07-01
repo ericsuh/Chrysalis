@@ -85,16 +85,25 @@ class App extends React.Component {
 
   componentDidMount() {
     usb.on("detach", async device => {
-      if (!focus.device) return;
-      if (this.flashing) return;
+      console.log("usb detach callback starting");
+      if (!focus.device) {
+        console.log("usb detach callback return, !focus.device");
+        return;
+      }
+      if (this.flashing) {
+        console.log("usb detach callback return, flashing");
+        return;
+      }
 
       if (
         focus.device.usb.vendorId != device.deviceDescriptor.idVendor ||
         focus.device.usb.productId != device.deviceDescriptor.idProduct
       ) {
+        console.log("usb detach callback focus.device != detached device");
         return;
       }
 
+      console.log("usb detach callback: navigate to ./");
       // Must await this to stop re-render of components reliant on `focus.device`
       // However, it only renders a blank screen. New route is rendered below.
       await navigate("./");
