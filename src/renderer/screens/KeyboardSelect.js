@@ -189,6 +189,7 @@ class KeyboardSelect extends React.Component {
   };
 
   componentDidMount() {
+    console.log("KeyboardSelect::componentDidMount");
     this.finder = () => {
       this.findKeyboards();
     };
